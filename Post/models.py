@@ -7,3 +7,6 @@ class post(models.Model):
     content =models.TextField()
     categori = models.ManyToManyField(category)
     author = models.ForeignKey(Author,on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return self.title
