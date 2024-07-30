@@ -1,25 +1,30 @@
 {% extends "base.html" %}
 
 {% block  content %}
-<div class="row">
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          
-          <a href="#" class="btn" style="background-color:#671BC7;color:white">Go somewhere</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
+
+
+<div class="d-flex flex-wrap justify-content-center px-5 pt-3">
+  {% for i in data %}
+  <div class="col-sm-4">
+    <div class="card gap-3">
+      <div class="card-body ">
+        <h5 class="card-title">{{i.title}}</h5>
+        <p class="card-text">{{i.content}}</p>
+        <p>Author: {{i.author.name}} </p>
+
+        <p>
+          Category:{% for cat in i.categori.all %}
+          <button class="btn btn-warning btn-sm m-2"disabled> {{cat.name}} </button>
+          {% endfor %}
+        </p>
+
+        <a href="{% url "edit_post" i.id %}"  class="btn btn-light btn-outline-success">Edit</a>
+        <a href="{% url 'delete_post' i.id %}" class="btn btn-danger" >Delete</a>
       </div>
     </div>
   </div>
+
+{% endfor %}
+ 
+    
 {% endblock %}
